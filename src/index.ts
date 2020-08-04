@@ -1,3 +1,5 @@
-import helloWorld from './modules/helloWorld'
+import Server from './modules/server'
 
-helloWorld()
+const server = new Server()
+
+server.start()

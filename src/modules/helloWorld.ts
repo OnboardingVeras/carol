@@ -3,6 +3,4 @@ function helloWorld (msg = 'Hello World!'): string {
   return msg
 }
 
-helloWorld()
-
 export default helloWorld
