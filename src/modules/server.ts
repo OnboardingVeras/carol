@@ -3,13 +3,11 @@ import Router from 'koa-router'
 import getPort from 'get-port'
 import asyncRetry from 'async-retry'
 import hello from './handlers/hello'
-import { Server } from 'http'
 
-class WebServer {
+class Server {
   private app: Koa
   private router: Router
   private port: number
-  private server: Server
 
   constructor () {
     this.app = new Koa()
@@ -35,11 +33,13 @@ class WebServer {
         await this.setRoutes()
         this.app.use(this.router.routes())
 
-        this.server = this.app.listen(this.port, async () => {
+        const server = this.app.listen(this.port, async () => {
           console.log(`Server listening on port: ${this.port}`)
         }).on('error', (err) => {
           console.error(err)
         })
+
+        return server
       } catch (error) {
         console.debug(`Server failed to start on port:${this.port}. Reason: ${error.message}.`)
         if (error.code !== 'EADDRINUSE') {
@@ -50,12 +50,6 @@ class WebServer {
       retires: 2, maxTimeout: 50, minTimeout: 50
     })
   }
-
-  public close () {
-    console.debug('Closing Server ...')
-    this.server.unref()
-    this.server.close()
-  }
 }
 
-export default WebServer
+export default Server
