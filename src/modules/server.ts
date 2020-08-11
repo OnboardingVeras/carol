@@ -14,6 +14,14 @@ class Server {
     this.router = new Router()
   }
 
+  public async getPort () {
+    return this.port
+  }
+
+  public async getApp () {
+    return this.app
+  }
+
   private async setPort () {
     const port = await getPort({
       port: getPort.makeRange(3000, 3050)
