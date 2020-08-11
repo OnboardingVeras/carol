@@ -3,11 +3,14 @@ import Router from 'koa-router'
 import getPort from 'get-port'
 import asyncRetry from 'async-retry'
 import hello from './handlers/hello'
+// eslint-disable-next-line no-unused-vars
+import { Server } from 'http'
 
-class Server {
+class WebServer {
   private app: Koa
   private router: Router
   private port: number
+  private server: Server
 
   constructor () {
     this.app = new Koa()
@@ -41,13 +44,13 @@ class Server {
         await this.setRoutes()
         this.app.use(this.router.routes())
 
-        const server = this.app.listen(this.port, async () => {
+        this.server = this.app.listen(this.port, async () => {
           console.log(`Server listening on port: ${this.port}`)
         }).on('error', (err) => {
           console.error(err)
         })
 
-        return server
+        return this.server
       } catch (error) {
         console.debug(`Server failed to start on port:${this.port}. Reason: ${error.message}.`)
         if (error.code !== 'EADDRINUSE') {
@@ -58,6 +61,10 @@ class Server {
       retires: 2, maxTimeout: 50, minTimeout: 50
     })
   }
+
+  public close () {
+    this.server.close()
+  }
 }
 
-export default Server
+export default WebServer

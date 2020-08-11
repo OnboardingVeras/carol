@@ -13,3 +13,8 @@ test('hello works', async () => {
 test('server works', async () => {
   expect(async () => await server.start()).not.toThrow(Error)
 })
+
+afterAll(async done => {
+  server.close()
+  done()
+})
