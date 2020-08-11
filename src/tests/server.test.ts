@@ -11,7 +11,10 @@ test('hello works', async () => {
 })
 
 test('server works', async () => {
-  expect(async () => await server.start()).not.toThrow(Error)
+  expect(async () => {
+    await server.start()
+    server.close()
+  }).not.toThrow(Error)
 })
 
 afterAll(async done => {

@@ -45,7 +45,7 @@ class WebServer {
         this.app.use(this.router.routes())
 
         this.server = this.app.listen(this.port, async () => {
-          console.log(`Server listening on port: ${this.port}`)
+          console.debug(`Server listening on port: ${this.port}`)
         }).on('error', (err) => {
           console.error(err)
         })
