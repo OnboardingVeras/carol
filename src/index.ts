@@ -1,5 +1,3 @@
-import Server from './modules/server'
+import helloWorld from './modules/helloWorld'
 
-const server = new Server()
-
-server.start()
+helloWorld()
