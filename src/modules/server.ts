@@ -7,13 +7,14 @@ import hello from './handlers/hello'
 import info from './handlers/info'
 // eslint-disable-next-line no-unused-vars
 import { Server } from 'http'
-
+const dotenv = require('dotenv')
+dotenv.config()
 class WebServer {
   private app: Koa
   private router: Router
   private port: number
   private server: Server
-  private mongoUrl: string = 'mongodb+srv://carolestrella:carol123@cluster0.1inby.mongodb.net/noderest?retryWrites=true&w=majority'
+  private mongoUrl: string = `mongodb+srv://carolestrella:${process.env.PASSWORD}@cluster0.1inby.mongodb.net/noderest?retryWrites=true&w=majority`
 
   constructor () {
     this.app = new Koa()
