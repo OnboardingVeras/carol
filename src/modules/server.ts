@@ -1,8 +1,10 @@
 import Koa from 'koa'
+import mongoose from 'mongoose'
 import Router from 'koa-router'
 import getPort from 'get-port'
 import asyncRetry from 'async-retry'
 import hello from './handlers/hello'
+import info from './handlers/info'
 // eslint-disable-next-line no-unused-vars
 import { Server } from 'http'
 
@@ -11,10 +13,16 @@ class WebServer {
   private router: Router
   private port: number
   private server: Server
+  private mongoUrl: string = 'mongodb+srv://carolestrella:carol123@cluster0.1inby.mongodb.net/noderest?retryWrites=true&w=majority'
 
   constructor () {
     this.app = new Koa()
     this.router = new Router()
+    this.mongoSetup()
+  }
+
+  private mongoSetup (): void {
+    mongoose.connect(this.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   }
 
   public async getPort () {
@@ -35,6 +43,7 @@ class WebServer {
 
   private async setRoutes () {
     this.router.get('/hello', hello)
+    this.router.get('/info', info)
   }
 
   public async start () {
