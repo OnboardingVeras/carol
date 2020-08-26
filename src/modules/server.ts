@@ -25,6 +25,14 @@ class WebServer {
     mongoose.connect(this.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   }
 
+  public async dropDatabase () {
+    await mongoose.connection.dropDatabase()
+  }
+
+  public async closeConnection () {
+    await mongoose.connection.close()
+  }
+
   public async getPort () {
     return this.port
   }
