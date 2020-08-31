@@ -3,21 +3,21 @@ import request from 'supertest'
 
 const server = new Server()
 
-test('hello works', async () => {
-  server.start()
+beforeAll(async () => {
+  await server.start()
+})
+
+test('test get method with /hello', async () => {
   const response = await request((await server.getApp()).callback()).get('/hello')
   expect(response.status).toBe(200)
   expect(response.body.message).toBe('funcionando')
 })
 
-test('server works', async () => {
-  expect(async () => {
-    await server.start()
-    server.close()
-  }).not.toThrow(Error)
+test('test get method with /info', async () => {
+
 })
 
 afterAll(async done => {
-  server.close()
+  await server.close()
   done()
 })

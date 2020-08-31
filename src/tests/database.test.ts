@@ -9,7 +9,7 @@ const server = new Server()
 const User = mongoose.model('User', UserSchema)
 
 beforeAll(async () => {
-  server.start()
+  await server.start()
 })
 
 test('create user', async () => {
@@ -19,8 +19,8 @@ test('create user', async () => {
 })
 
 afterAll(async done => {
-  server.close()
-  server.dropDatabase()
-  server.closeConnection()
+  await server.close()
+  await server.dropDatabase()
+  await server.closeConnection()
   done()
 })

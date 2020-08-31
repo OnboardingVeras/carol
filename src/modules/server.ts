@@ -22,16 +22,23 @@ class WebServer {
     this.mongoSetup()
   }
 
-  private mongoSetup (): void {
-    mongoose.connect(this.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  private async mongoSetup (): Promise<void> {
+    try {
+      await mongoose.connect(this.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+      console.log('Successfully connected to mongodb')
+    } catch (error) {
+      console.debug(`Failed to connect database. Reason: ${error.message}`)
+    }
   }
 
-  public async dropDatabase () {
+  public async dropDatabase () : Promise<void> {
     await mongoose.connection.dropDatabase()
+    console.log('Successfully dropped database')
   }
 
-  public async closeConnection () {
+  public async closeConnection () : Promise<void> {
     await mongoose.connection.close()
+    console.log('Successfully disconnected to mongodb')
   }
 
   public async getPort () {
