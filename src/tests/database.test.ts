@@ -10,6 +10,7 @@ const User = mongoose.model('User', UserSchema)
 
 beforeAll(async () => {
   await server.start()
+  await server.dropDatabase()
 })
 
 test('create user', async () => {
@@ -20,7 +21,6 @@ test('create user', async () => {
 
 afterAll(async done => {
   await server.close()
-  await server.dropDatabase()
   await server.closeConnection()
   done()
 })
