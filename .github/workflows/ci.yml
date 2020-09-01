@@ -31,9 +31,9 @@ jobs:
     - name: Lint
       run: yarn lint
 
-
-    with: # Configura o segredo como uma entrada
-      PASSWORD: ${{ secrets.PASSWORD }}
+    - name: Code References
+      with: # Configura o segredo como uma entrada
+        PASSWORD: ${{ secrets.PASSWORD }}
     
     - name: Test
       run: yarn test --coverage --detectOpenHandles
