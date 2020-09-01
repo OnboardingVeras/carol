@@ -31,14 +31,12 @@ jobs:
     - name: Lint
       run: yarn lint
 
-    - name: Create env file
-      run: 
-        touch .env
-        echo PASSWORD = ${{ secrets.PASSWORD }} >> .env
-        cat .env
     
     - name: Test
       run: yarn test --coverage --detectOpenHandles
+      env:
+        CI: true
+        PASSWORD: ${{secrets.PASSWORD}}
       
       
       
