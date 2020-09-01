@@ -30,10 +30,14 @@ jobs:
       
     - name: Lint
       run: yarn lint
+
+    - name: Create env file
+      run: 
+        touch .env
+        echo PASSWORD= ${{ secrets.PASSWORD }} >> .env
     
     - name: Test
       run: yarn test --coverage --detectOpenHandles
-      env: # Configura o segredo como uma entrada
-        PASSWORD: ${{ secrets.PASSWORD }}
+      
       
       
