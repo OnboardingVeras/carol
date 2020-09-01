@@ -33,7 +33,7 @@ jobs:
     
     - name: Test
       run: yarn test --coverage --detectOpenHandles
-      with: # Configura o segredo como uma entrada
+      env: # Configura o segredo como uma entrada
         PASSWORD: ${{ secrets.PASSWORD }}
       
       
