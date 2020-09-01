@@ -13,10 +13,6 @@ test('test get method with /hello', async () => {
   expect(response.body.message).toBe('funcionando')
 })
 
-test('test get method with /info', async () => {
-
-})
-
 afterAll(async done => {
   await server.close()
   done()

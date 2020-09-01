@@ -3,6 +3,8 @@ import request from 'supertest'
 import Server from '../modules/server'
 import { UserSchema } from '../models/user'
 
+jest.setTimeout(30000)
+
 const server = new Server()
 const User = mongoose.model('User', UserSchema)
 
