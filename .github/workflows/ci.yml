@@ -32,6 +32,8 @@ jobs:
       run: yarn lint
     
     - name: Test
+      with: # Configura o segredo como uma entrada
+        PASSWORD: ${{ secrets.PASSWORD }}
       run: yarn test --coverage --detectOpenHandles
       
       
