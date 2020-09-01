@@ -22,9 +22,9 @@ class WebServer {
     this.mongoSetup()
   }
 
-  private async mongoSetup (): Promise<void> {
+  private async mongoSetup (config = { useNewUrlParser: true, useUnifiedTopology: true }): Promise<void> {
     try {
-      await mongoose.connect(this.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+      await mongoose.connect(this.mongoUrl, config)
       console.log('Successfully connected to mongodb')
     } catch (error) {
       console.debug(`Failed to connect database. Reason: ${error.message}`)
