@@ -7,7 +7,7 @@ import hello from './handlers/hello'
 import info from './handlers/info'
 // eslint-disable-next-line no-unused-vars
 import { Server } from 'http'
-const dotenv = require('dotenv')
+import dotenv from 'dotenv'
 dotenv.config()
 class WebServer {
   private app: Koa

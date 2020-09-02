@@ -20,7 +20,7 @@ test('create user', async () => {
 })
 
 afterAll(async done => {
-  await server.close()
   await server.closeConnection()
+  await server.close()
   done()
 })
