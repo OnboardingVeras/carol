@@ -5,10 +5,9 @@ import getPort from 'get-port'
 import asyncRetry from 'async-retry'
 import hello from './handlers/hello'
 import info from './handlers/info'
+import './env'
 // eslint-disable-next-line no-unused-vars
 import { Server } from 'http'
-import dotenv from 'dotenv'
-dotenv.config()
 class WebServer {
   private app: Koa
   private router: Router
@@ -32,13 +31,21 @@ class WebServer {
   }
 
   public async dropDatabase () : Promise<void> {
-    await mongoose.connection.dropDatabase()
-    console.log('Successfully dropped database')
+    try {
+      await mongoose.connection.dropDatabase()
+      console.log('Successfully dropped database')
+    } catch (error) {
+      console.debug(`Failed to connect database. Reason: ${error.message}`)
+    }
   }
 
   public async closeConnection () : Promise<void> {
-    await mongoose.connection.close()
-    console.log('Successfully disconnected to mongodb')
+    try {
+      await mongoose.connection.close()
+      console.log('Successfully disconnected to mongodb')
+    } catch (error) {
+      console.debug(`Failed to connect database. Reason: ${error.message}`)
+    }
   }
 
   public async getPort () {

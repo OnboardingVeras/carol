@@ -16,9 +16,8 @@ async function getUsers () {
   return User.find()
 }
 
-createUsers()
-
 async function info (ctx: Koa.Context) : Promise<void> {
+  await createUsers()
   ctx.body = await getUsers()
 }
 

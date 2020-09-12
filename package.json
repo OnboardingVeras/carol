@@ -10,7 +10,7 @@
     "build:clean": "rm -rf build",
     "build": "yarn build:clean && yarn tsc",
     "lint": "eslint . --ext .ts",
-    "test": "jest --forceExit --detectOpenHandles -i"
+    "test": "jest --forceExit -i"
   },
   "devDependencies": {
     "@types/jest": "^26.0.7",

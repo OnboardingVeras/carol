@@ -9,7 +9,6 @@ export const UserSchema = new Schema({
   },
   email: {
     type: String,
-    unique: true,
     require: true,
     lowercase: true
   }
