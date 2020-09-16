@@ -1,20 +1,51 @@
 import Koa from 'koa'
+import mongoose from 'mongoose'
 import Router from 'koa-router'
 import getPort from 'get-port'
 import asyncRetry from 'async-retry'
 import hello from './handlers/hello'
+import info from './handlers/info'
+import './env'
 // eslint-disable-next-line no-unused-vars
 import { Server } from 'http'
-
 class WebServer {
   private app: Koa
   private router: Router
   private port: number
   private server: Server
+  private mongoUrl: string = `mongodb+srv://carolestrella:${process.env.PASSWORD}@cluster0.1inby.mongodb.net/noderest?retryWrites=true&w=majority`
 
   constructor () {
     this.app = new Koa()
     this.router = new Router()
+    this.mongoSetup()
+  }
+
+  private async mongoSetup (config = { useNewUrlParser: true, useUnifiedTopology: true }): Promise<void> {
+    try {
+      await mongoose.connect(this.mongoUrl, config)
+      console.log('Successfully connected to mongodb')
+    } catch (error) {
+      console.debug(`Failed to connect database. Reason: ${error.message}`)
+    }
+  }
+
+  public async dropDatabase () : Promise<void> {
+    try {
+      await mongoose.connection.dropDatabase()
+      console.log('Successfully dropped database')
+    } catch (error) {
+      console.debug(`Failed to connect database. Reason: ${error.message}`)
+    }
+  }
+
+  public async closeConnection () : Promise<void> {
+    try {
+      await mongoose.connection.close()
+      console.log('Successfully disconnected to mongodb')
+    } catch (error) {
+      console.debug(`Failed to connect database. Reason: ${error.message}`)
+    }
   }
 
   public async getPort () {
@@ -35,6 +66,7 @@ class WebServer {
 
   private async setRoutes () {
     this.router.get('/hello', hello)
+    this.router.get('/info', info)
   }
 
   public async start () {

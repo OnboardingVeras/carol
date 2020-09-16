@@ -30,9 +30,13 @@ jobs:
       
     - name: Lint
       run: yarn lint
+
     
     - name: Test
       run: yarn test --coverage --detectOpenHandles
+      env:
+        CI: true
+        PASSWORD: ${{secrets.PASSWORD}}
       
       
       
