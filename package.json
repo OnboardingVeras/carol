@@ -6,7 +6,8 @@
   "author": "carolestrella <carolina@host.com.br>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon",
+    "watch": "nodemon",
+    "start": "yarn build && node ./build/index.js",
     "build:clean": "rm -rf build",
     "build": "yarn build:clean && yarn tsc",
     "lint": "eslint . --ext .ts",
