@@ -2,6 +2,6 @@ version: "3.8"
 services: 
   api:
     build: .
-    command: yarn dev
+    command: yarn start
     ports:
       - "3000:3000"
