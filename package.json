@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "nodemon",
-    "start": "yarn node ./build/index.js",
+    "start": "yarn build && node ./build/index.js",
     "build:clean": "rm -rf build",
     "build": "yarn build:clean && yarn tsc",
     "lint": "eslint . --ext .ts",
