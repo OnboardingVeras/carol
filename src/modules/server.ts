@@ -13,7 +13,7 @@ class WebServer {
   private router: Router
   private port: number
   private server: Server
-  private mongoUrl: string = `mongodb+srv://carolestrella:${process.env.PASSWORD}@cluster0.1inby.mongodb.net/noderest?retryWrites=true&w=majority`
+  private mongoUrl: string = 'mongodb://127.0.0.1:27017/local'
 
   constructor () {
     this.app = new Koa()
