@@ -13,7 +13,6 @@ class WebServer {
   private router: Router
   private port: number
   private server: Server
-  private mongoUrl: string = 'mongodb://127.0.0.1:27017/local'
 
   constructor () {
     this.app = new Koa()
@@ -23,8 +22,8 @@ class WebServer {
 
   private async mongoSetup (config = { useNewUrlParser: true, useUnifiedTopology: true }): Promise<void> {
     try {
-      await mongoose.connect(this.mongoUrl, config)
-      console.log('Successfully connected to mongodb')
+      await mongoose.connect('mongodb://' + `${process.env.MONGO_HOST}` + `${process.env.MONGO_PORT}` + '/local', config)
+      console.log(`Successfully connected to mongodb on host ${process.env.MONGO_HOST} and port ${process.env.MONGO_PORT}`)
     } catch (error) {
       console.debug(`Failed to connect database. Reason: ${error.message}`)
     }
