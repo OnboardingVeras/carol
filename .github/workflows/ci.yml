@@ -40,7 +40,8 @@ jobs:
       run: yarn test --coverage --detectOpenHandles
       env:
         CI: true
-        PASSWORD: ${{secrets.PASSWORD}}
+        MONGO_HOST: ${{secrets.MONGO_HOST}}
+        MONGO_PORT: ${{secrets.MONGO_PORT}}
       
       
       
