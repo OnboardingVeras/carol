@@ -6,5 +6,6 @@ if [ -z "$MONGO_HOST" || -z "$MONGO_PORT"]; then
 fi
 
 echo "Mongo host: ${MONGO_HOST}"
-echo "Mongo port: ${MONGO_PORT"
+echo "Mongo port: ${MONGO_PORT}"
 
+exec "$@"
