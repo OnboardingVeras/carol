@@ -8,5 +8,7 @@ RUN yarn
 
 COPY . .
 
+ENTRYPOINT [ "./docker-entrypoint.sh" ]
+
 CMD ["yarn", "start"]
 
