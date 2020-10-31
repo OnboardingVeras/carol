@@ -15,4 +15,8 @@ services:
     image: "mongo"
     ports:
       - "27017:27017"
+  local:
+    image: busybox
+    depends_on: 
+      - db
     

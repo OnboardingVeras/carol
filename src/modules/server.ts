@@ -8,8 +8,8 @@ import info from './handlers/info'
 import './env'
 // eslint-disable-next-line no-unused-vars
 import { Server } from 'http'
-const MONGO_HOST: string = `${process.env.MONGO_HOST}` || 'localhost'
-const MONGO_PORT: string = `${process.env.MONGO_PORT}` || '27017'
+const MONGO_HOST: string = process.env.MONGO_HOST || 'localhost'
+const MONGO_PORT: string = process.env.MONGO_PORT || '27017'
 class WebServer {
   private app: Koa
   private router: Router
@@ -24,8 +24,10 @@ class WebServer {
 
   private async mongoSetup (config = { useNewUrlParser: true, useUnifiedTopology: true }): Promise<void> {
     try {
-      await mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/local`, config)
-      console.log(`Successfully connected to mongodb on host ${process.env.MONGO_HOST} and port ${process.env.MONGO_PORT}`)
+      const url = `mongodb://${MONGO_HOST}:${MONGO_PORT}/local`
+      console.log(url)
+      await mongoose.connect(url, config)
+      console.log(`Successfully connected to mongodb on host ${MONGO_HOST} and port ${MONGO_PORT}`)
     } catch (error) {
       console.debug(`Failed to connect database. Reason: ${error.message}`)
     }

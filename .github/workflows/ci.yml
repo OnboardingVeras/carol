@@ -38,10 +38,7 @@ jobs:
     
     - name: Test
       run: yarn test --coverage --detectOpenHandles
-      env:
-        CI: true
-        MONGO_HOST: ${{secrets.MONGO_HOST}}
-        MONGO_PORT: ${{secrets.MONGO_PORT}}
+      
       
       
       
