@@ -38,9 +38,7 @@ jobs:
     
     - name: Test
       run: yarn test --coverage --detectOpenHandles
-      env:
-        CI: true
-        PASSWORD: ${{secrets.PASSWORD}}
+      
       
       
       
